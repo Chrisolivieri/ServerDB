@@ -5,14 +5,14 @@ POST http://localhost:5000/authors
 Content-Type: application/json
 
 {
-    "name": "Giacomo",
-    "email": "sadsfdsf@adsad.it",
-    "age": 45,
+    "name": "Luca",
+    "email": "sasf@adsad.it",
+    "age": 53,
     "approved": true
 }
 ###
 
-DELETE http://localhost:5000/authors/66ad0188cefcf48d9c5401f6
+DELETE http://localhost:5000/authors/66acf7150e43998c09109b1a
 
 ###
 
@@ -20,7 +20,7 @@ PUT http://localhost:5000/authors/66acf7150e43998c09109b1a
 Content-Type: application/json
 
 {
-    "name" : "Carlo"
+    "name" : "Giovanni"
 }
 
 ###

@@ -5,12 +5,12 @@ import blogPost from "../models/BlogPost.js";
 const route = express.Router();
 
 route.get("/", async (req, res) => {
-  const page = req.query.page || 1;
-  const perPage = req.query.perPage || 2;
+  const page = req.query.page || 1; // numero della pagina, di default è 1
+  const perPage = req.query.perPage || 2; // numero di elementi per pagina, di default è 2
   const blogPosts = await blogPost.find({})
-  .sort({title: 1 })
-  .skip((page -1) * perPage)
-  .limit(perPage)
+  .sort({title: 1 }) // ordinamento per titolo
+  .skip((page -1) * perPage) // elementi da saltare
+  .limit(perPage) // limita il numero di post per pagina
   res.send(blogPosts);
 });
 

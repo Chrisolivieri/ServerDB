@@ -3,7 +3,8 @@ import { Col, Image, Row } from "react-bootstrap";
 import "./styles.css";
 
 const BlogAuthor = props => {
-  const { name, avatar } = props;
+  const { name, avatar , author } = props;
+  //console.log(author)
   return (
     <Row>
       <Col xs={"auto"} className="pe-0">

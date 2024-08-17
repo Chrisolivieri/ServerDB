@@ -5,6 +5,7 @@ import BlogAuthor from "../blog-author/BlogAuthor";
 import "./styles.css";
 const BlogItem = (props) => {
   const { title, cover, author, _id } = props;
+  //console.log(author)
   
   return (
     <Link to={`/blog/${_id}`} className="blog-link">
@@ -14,7 +15,7 @@ const BlogItem = (props) => {
           <Card.Title>{title}</Card.Title>
         </Card.Body>
         <Card.Footer>
-          <BlogAuthor {...author} />
+          <BlogAuthor name={author} />
         </Card.Footer>
       </Card>
     </Link>

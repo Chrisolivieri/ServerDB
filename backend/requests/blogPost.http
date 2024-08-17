@@ -28,5 +28,5 @@ PUT http://localhost:5000/blogPosts/66b12db996dc33e858d9d578
 Content-Type: application/json
 
 {
-    "title" : "My kitchen"
+    "title" : "Kitchen"
 }
