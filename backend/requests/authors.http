@@ -26,3 +26,7 @@ Content-Type: application/json
 ###
 
 GET http://localhost:5000/authors/?perPage=3
+
+###
+
+GET http://localhost:5000/authors/66acf7150e43998c09109b1a/blogPosts

@@ -11,6 +11,7 @@ const BlogList = props => {
   useEffect(() => {
     (async () => {
       const posts = await fetchLoadPosts();
+      console.log(posts);
       setPosts(posts);
     })();
   }, []);

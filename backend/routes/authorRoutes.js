@@ -1,6 +1,7 @@
 // importiamo sempre express nei file di rotte e i nostri modelli schema
 import express from "express";
 import author from "../models/Authors.js";
+import blogPost from "../models/BlogPost.js";
 
 const route = express.Router();
 
@@ -87,6 +88,18 @@ route.delete("/:id", async (req, res) => {
     res
       .status(500)
       .send({ error: "An error occurred while deleting the author" });
+  }
+});
+
+route.get("/:id/blogPosts/", async (req, res) => {
+  try {
+    const AuthorAllBlogPosts = await blogPost.find({ author: req.params.id }) // recupero tutti i blogPosts del singolo autore con l'id specificato
+    res.send({
+      data: AuthorAllBlogPosts,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(400).send({ error: "something went wrong" });
   }
 });
 
