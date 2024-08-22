@@ -25,4 +25,4 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:5000/authors/66acfc3905cd283271ecfacd
+GET http://localhost:5000/authors/?perPage=3

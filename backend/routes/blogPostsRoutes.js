@@ -7,7 +7,7 @@ const route = express.Router();
 route.get("/", async (req, res) => {
   const page = req.query.page || 1; // numero della pagina, di default è 1
   const perPage = req.query.perPage || 2; // numero di elementi per pagina, di default è 2
-  const blogPosts = await blogPost.find({})
+  const blogPosts = await blogPost.find(req.query.title ?{title: {$regex: req.query.title,$options: "i"}}:{}) // ricerca per titolo, di default è vuota se il titolo non è specificato
   .sort({title: 1 }) // ordinamento per titolo
   .skip((page -1) * perPage) // elementi da saltare
   .limit(perPage) // limita il numero di post per pagina

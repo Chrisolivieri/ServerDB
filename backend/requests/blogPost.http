@@ -30,3 +30,7 @@ Content-Type: application/json
 {
     "title" : "Kitchen"
 }
+
+###
+
+GET http://localhost:5000/blogPosts?perPage=3&title=prato

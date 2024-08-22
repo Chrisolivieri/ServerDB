@@ -9,10 +9,11 @@ import { fetchNewPost } from "../../data/fetch";
 
 const NewBlogPost = props => {
   const [text, setText] = useState("");
+
   const initialFormValue = {
     category: "",
     title: "",
-    cover: "https://picsum.photos/300/300",
+    cover: "https://picsum.photos/200/300",
     readTime: {
         value: 0,
         unit: ""
@@ -43,11 +44,11 @@ const NewBlogPost = props => {
         <Form.Group controlId="blog-form" className="mt-3">
           <Form.Label>Titolo</Form.Label>
           {/* onChange sta in ascolto dell'evento e viene chiamata la funzione */}
-          <Form.Control onChange={(event) => handleChangeFormValue(event)} size="lg" placeholder="Title" />
+          <Form.Control onChange={(event) => handleChangeFormValue(event)} size="lg" placeholder="Title" name="title" />
         </Form.Group>
         <Form.Group controlId="blog-category" className="mt-3">
           <Form.Label>Categoria</Form.Label>
-          <Form.Control onChange={(event)=>handleChangeFormValue(event)} size="lg" as="select">
+          <Form.Control onChange={(event)=>handleChangeFormValue(event)} name="category" size="lg" as="select">
             <option>Categoria 1</option>
             <option>Categoria 2</option>
             <option>Categoria 3</option>
@@ -56,7 +57,12 @@ const NewBlogPost = props => {
           </Form.Control>
         </Form.Group>
         <Form.Group controlId="blog-content" className="mt-3">
+          <Form.Group controlId="blog-author" className="mt-3">
+            <Form.Label>Autore</Form.Label>
+            <Form.Control onChange={(event) => handleChangeFormValue(event)} size="lg" placeholder="Autore" name="author" /> 
+          </Form.Group>
           <Form.Label>Contenuto Blog</Form.Label>
+          
 
           <Editor value={text} onChange={handleChange} className="new-blog-content" />
         </Form.Group>

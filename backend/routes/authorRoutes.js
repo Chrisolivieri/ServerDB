@@ -1,21 +1,23 @@
-// importiamo sempre express nei file di rotte
+// importiamo sempre express nei file di rotte e i nostri modelli schema
 import express from "express";
 import author from "../models/Authors.js";
 
 const route = express.Router();
 
-//metodo get,post,put,delete accettano 2 parametri (req, res)
+//metodo get,post,put,delete accettano 2 parametri (req, res(richiesta e risposta))
 route.get("/", async (req, res) => {
+  
   const page = req.query.page || 1;
-  const perPage = req.query.perPage || 3;
-  //qui recuperiamo tutti gli autori nel database
-  //callback async
-  const authors = await author.find({})
-  // li ordiniamo per nome in modo crescente
-  .sort({ name: 1 , age: 1})
-  // lo paginiamo a 3 per 3 elementi a volta 
-  .skip((page -1) * perPage)
-  .limit(perPage)
+  let perPage = req.query.perPage || 3;
+  perPage = perPage > 15 ? 15 : perPage 
+ 
+  const authors = await author.find({}) //qui recuperiamo tutti gli autori nel database,callback async
+
+  .sort({ name: 1 , age: 1})   // li ordiniamo per nome in modo crescente
+  
+  .skip((page -1) * perPage) // lo paginiamo a 3 per 3 elementi a volta 
+
+  .limit(perPage) // indico gli elementi da mostrare nella pagina
 
   res.send(authors);
 });
@@ -42,7 +44,7 @@ route.post("/", async (req, res) => {
     const savedAuthor = await newAuthor.save();
 
     //invia l'autore creato come risposta
-    res.status(201).send(savedAuthor);
+   return res.status(201).send(savedAuthor);
   } catch (err) {
     console.log(err);
     res.status(400).send({ error: "something went wrong" });
