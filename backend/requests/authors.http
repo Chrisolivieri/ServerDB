@@ -26,7 +26,7 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:5000/authors/?perPage=5
+GET http://localhost:5000/authors/?perPage=10
 
 ###
 

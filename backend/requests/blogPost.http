@@ -1,4 +1,4 @@
-GET http://localhost:5000/blogPosts
+GET http://localhost:5000/blogPosts/?perPage=10
 
 ###
 
@@ -7,19 +7,12 @@ POST http://localhost:5000/blogPosts
 Content-Type: application/json
 
 {
-    "category": "Home",
-    "title": "Kitchen",
-    "cover": "https://www.riccicasa.it/wp-content/uploads/2021/07/cucina-bellary-frassino-biancospino.jpg",
-    "readTime": {
-        "value" : 8,
-        "unit" : "min"
-    },
-    "author" : "66acf7150e43998c09109b1a",
-    "content" : "Decorazione da cucina personalizzata di armadio integrale moderno tipo economico di armadio da cucina da appoggio in pietra di quarzo"
+    "title": "blu",
+    "author" : "pincos@gmail.com",
 }
 ###
 
-DELETE http://localhost:5000/blogPosts/66b2440d0c82c50b31222332
+DELETE http://localhost:5000/blogPosts/66ccb19aead46d287b0c2d23
 
 ###
 

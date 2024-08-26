@@ -1,4 +1,5 @@
 import blogPost from "../models/BlogPost.js";
+import transport from "../services/mailService.js";
 
 export const allBlogPosts = async (req, res) => {
   const page = req.query.page || 1; // numero della pagina, di default è 1
@@ -28,16 +29,23 @@ export const singleBlogPost = async (req, res) => {
 };
 
 export const createBlogPost = async (req, res) => {
-  const postData = req.body;
+  
   //questo nuovo post lo creerò con i dati che ho in PostData che è il body della richiesta e ci metto il model importato
-  const newPost = new blogPost(postData);
+  const newPost = new blogPost(req.body);
 
   try {
-    //lo salviamo nel database
-    const savedPost = await newPost.save();
+    const savedPost = await newPost.save(); //lo salviamo nel database
 
-    //invia il post creato come risposta
-    res.status(201).send(savedPost);
+    // se la risposta è positiva viene inviata una mail
+    await transport.sendMail({
+      from: "no-reply@example.com", // indirizzo di provenienza
+      to: savedPost.author, // indirizzo di destinazione
+      subject: "Post created", // oggetto
+      text: "You've created a new post", // testo
+      html: "<b>You've created a new post,congrats!</b>", // html body
+    });
+
+    res.status(201).send(savedPost); //invia il post creato come risposta
   } catch (err) {
     console.log(err);
     res.status(400).send({ error: "something went wrong" });
@@ -80,7 +88,7 @@ export const patchCoverBlogPost = async (req, res) => {
   const dataToModify = { cover: req.file.path };
   try {
     //chiedo al database di modificare l'utente con l'id specificato
-    await blogPost.findByIdAndUpdate(id, dataToModify , { new: true });
+    await blogPost.findByIdAndUpdate(id, dataToModify, { new: true });
     // se volessimo restituire l'autore modificato, dobbiamo usare findById
     const updatedBlogPost = await blogPost.findById(id);
     //invia l'autore modificato come risposta
