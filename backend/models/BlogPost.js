@@ -22,6 +22,9 @@ const blogPostSchema = new Schema(
     content: {
       type: String,
     },
+    cover : {
+      type: String
+    }
   },
   {
     collection: "blogPosts",

@@ -23,6 +23,9 @@ const authorSchema = new Schema(
       enum: ["admin", "user"],
       default: "user",
     },
+    avatar:{
+      type: String,
+    },
     approved: Boolean,
   },
   {
