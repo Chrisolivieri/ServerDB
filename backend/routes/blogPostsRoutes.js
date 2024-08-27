@@ -2,6 +2,7 @@
 import express from "express";
 import * as blogPostsController from "../controllers/blogPosts.controller.js";
 import uploadCloudinary from "../middlewares/uploadCloudinary.js";
+import * as commentController from "../controllers/comment.controller.js";
 
 const route = express.Router();
 
@@ -22,5 +23,21 @@ route.delete("/:id", blogPostsController.deleteBlogPost);
 
 // modifica dell'immagine di copertina
 route.patch("/:id/cover", uploadCloudinary.single("cover"), blogPostsController.patchCoverBlogPost);
+
+// recupero tutti i commenti di un singolo blogPost
+route.get("/:id/comments", commentController.readAllComments);
+
+// recupero un singolo commento
+route.get("/:id/comments/:id", commentController.readOneComment);
+
+// creazione di un nuovo commento a un blogPost
+route.post("/:id/comments", commentController.createComment);
+
+// modifica di un commento
+route.put("/:id/comments/:id", commentController.updateComment);
+
+// rimozione di un commento
+route.delete("/:id/comments/:id", commentController.deleteComment);
+
 
 export default route;

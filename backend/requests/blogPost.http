@@ -2,22 +2,28 @@ GET http://localhost:5000/blogPosts/?perPage=10
 
 ###
 
-POST http://localhost:5000/blogPosts
+GET http://localhost:5000/blogPosts/66cde53b0f768a29062566c1
 
+POST http://localhost:5000/blogPosts
 Content-Type: application/json
 
 {
+    "category": "categoria1",
     "title": "blu",
-    "author" : "pincos@gmail.com",
+    "readTime":{
+        "value" : 5,
+        "unit" : "min"
+    },
+    "author": "prova2@gmail.com",
+    "content": "ciaooo"
+
 }
 ###
-
-DELETE http://localhost:5000/blogPosts/66ccb19aead46d287b0c2d23
+DELETE http://localhost:5000/blogPosts/66cde5510f768a29062566c3
 
 ###
 
 PUT http://localhost:5000/blogPosts/66b12db996dc33e858d9d578
-
 Content-Type: application/json
 
 {
@@ -27,3 +33,26 @@ Content-Type: application/json
 ###
 
 GET http://localhost:5000/blogPosts?perPage=3&title=prato
+
+###
+POST http://localhost:5000/blogPosts/66bf939feeeb01604d9b1f1c/comments
+Content-Type: application/json
+
+{
+    "content": "terzo commento"
+}
+###
+GET http://localhost:5000/blogPosts/66bf939feeeb01604d9b1f1c/comments
+
+###
+GET http://localhost:5000/blogPosts/66bf939feeeb01604d9b1f1c/comments/66ce03533aaa74ed5f8d2464
+
+###
+PUT http://localhost:5000/blogPosts/66bf939feeeb01604d9b1f1c/comments/66ce03533aaa74ed5f8d2464
+Content-Type: application/json
+
+{
+    "content": "commento modificato"
+}
+###
+DELETE http://localhost:5000/blogPosts/66bf939feeeb01604d9b1f1c/comments/66ce03483aaa74ed5f8d2462

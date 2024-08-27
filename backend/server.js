@@ -21,8 +21,8 @@ await mongoose
     console.log(err);
   });
 
-server.use(morgan("dev"));
-server.use(helmet());
+server.use(morgan("dev")); // serve per fare i log delle richieste nel terminale
+server.use(helmet()); // aggiunge alcuni header alle risposte e ne nasconde altri per migliorere la sicurezza dell'api
 server.use(express.json()); // dobbiamo dire al server di usare quelle rotte su routes , stiamo dicendo ad express di prendere quello che arriva nel body e trasformarlo in json
 
 server.use(cors()); // cors è una sicurezza del browser che dice di non rispondere ai domini diversi dal tuo, in questo caso non gli diamo nessuna porta specifica quindi risponde sempre , prima di fare le rotte, connette il backend al frontend
