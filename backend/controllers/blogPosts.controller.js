@@ -1,5 +1,6 @@
 import blogPost from "../models/BlogPost.js";
 import transport from "../services/mailService.js";
+import Author from "../models/Authors.js";
 
 export const allBlogPosts = async (req, res) => {
   const page = req.query.page || 1; // numero della pagina, di default è 1
@@ -12,7 +13,8 @@ export const allBlogPosts = async (req, res) => {
     ) // ricerca per titolo, di default è vuota se il titolo non è specificato
     .sort({ title: 1 }) // ordinamento per titolo
     .skip((page - 1) * perPage) // elementi da saltare
-    .limit(perPage); // limita il numero di post per pagina
+    .limit(perPage) // limita il numero di post per pagina
+    .populate("author");
   res.send(blogPosts);
 };
 
@@ -21,25 +23,25 @@ export const singleBlogPost = async (req, res) => {
   const id = req.params.id;
 
   try {
-    const findBlogPost = await blogPost.findById(id);
+    const findBlogPost = await blogPost.findById(id).populate("author");
     res.send(findBlogPost);
   } catch (err) {
-    res.status(400).send({ error: "something went wrong" });
+     res.status(400).send({ error: "something went wrong" });
   }
 };
 
 export const createBlogPost = async (req, res) => {
-  
   //questo nuovo post lo creerò con i dati che ho in PostData che è il body della richiesta e ci metto il model importato
-  const newPost = new blogPost(req.body);
+  const newPost = new blogPost({...req.body, cover:req.file.path,readTime: JSON.parse(req.body.readTime)});
 
   try {
     const savedPost = await newPost.save(); //lo salviamo nel database
-
+    const author = await Author.findById(savedPost.author);
     // se la risposta è positiva viene inviata una mail
+    console.log("Author email:", author.email);
     await transport.sendMail({
       from: "no-reply@example.com", // indirizzo di provenienza
-      to: savedPost.author, // indirizzo di destinazione
+      to: author.email, // indirizzo di destinazione
       subject: "Post created", // oggetto
       text: "You've created a new post", // testo
       html: "<b>You've created a new post,congrats!</b>", // html body

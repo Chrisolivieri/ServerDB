@@ -15,7 +15,7 @@ const BlogItem = (props) => {
           <Card.Title>{title}</Card.Title>
         </Card.Body>
         <Card.Footer>
-          <BlogAuthor name={author} />
+          <BlogAuthor {...author} /> 
         </Card.Footer>
       </Card>
     </Link>

@@ -13,7 +13,7 @@ route.get("/", blogPostsController.allBlogPosts);
 route.get("/:id", blogPostsController.singleBlogPost);
 
 // creazione di un nuovo blogPost
-route.post("/", blogPostsController.createBlogPost);
+route.post("/", uploadCloudinary.single("cover"), blogPostsController.createBlogPost);
 
 // modifica di un blogPost
 route.put("/:id", blogPostsController.updateBlogPost);

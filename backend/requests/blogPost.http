@@ -9,12 +9,13 @@ Content-Type: application/json
 
 {
     "category": "categoria1",
-    "title": "blu",
+    "title": "Primo Post",
+    "cover":,
     "readTime":{
         "value" : 5,
         "unit" : "min"
     },
-    "author": "prova2@gmail.com",
+    "author": "66acfc3905cd283271ecfacd",
     "content": "ciaooo"
 
 }
