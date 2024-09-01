@@ -7,7 +7,7 @@ import blogPostRoutes from "./routes/blogPostsRoutes.js";
 import morgan from "morgan";
 import helmet from "helmet";
 import  endpoints from "express-list-endpoints";
-
+import authenticationRoutes from "./routes/authenticationRoutes.js";
 const port = process.env.PORT || 5000;
 const host = process.env.HOST 
 const server = express();
@@ -30,6 +30,7 @@ server.use(cors()); // cors è una sicurezza del browser che dice di non rispond
 // dobbiamo dire al server di usare quelle rotte su routes, per ogni file di rotte dobbiamo avere un server.use
 server.use("/authors", authorRoutes);
 server.use("/blogPosts", blogPostRoutes);
+server.use("/", authenticationRoutes)
 
 server.listen(port, () => {
   console.log(`Il server sta funzionando nella porta ${port} e sul host ${host}`);

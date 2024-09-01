@@ -12,21 +12,29 @@ const authorSchema = new Schema(
       unique: true,
       // per rendere obbligatoria
       required: true,
+      lowercaase: true,
+      trim: true,
     },
     age: {
       type: Number,
       minLenght: 0,
       maxLenght: 100,
     },
+    password: {
+      type: String,
+      required: true,
+    },
     role: {
       type: String,
       enum: ["admin", "user"],
       default: "user",
     },
-    avatar:{
+    avatar: {
       type: String,
     },
     approved: Boolean,
+    verifiedAt: Date, // data di verifica
+    verificationCode: String // codice di verifica
   },
   {
     collection: "authors",

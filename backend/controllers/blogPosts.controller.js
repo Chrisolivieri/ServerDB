@@ -31,26 +31,55 @@ export const singleBlogPost = async (req, res) => {
 };
 
 export const createBlogPost = async (req, res) => {
-  //questo nuovo post lo creerò con i dati che ho in PostData che è il body della richiesta e ci metto il model importato
-  const newPost = new blogPost({...req.body, cover:req.file.path,readTime: JSON.parse(req.body.readTime)});
-
   try {
-    const savedPost = await newPost.save(); //lo salviamo nel database
+    // verifica che req.file esista, altrimenti imposta cover a null
+    const coverPath = req.file ? req.file.path : null;
+
+    // log per debug
+    console.log("Received readTime:", req.body.readTime);
+
+    let readTime;
+    try {
+      // verifica se readTime è una stringa JSON valida prima di parsare
+      readTime = typeof req.body.readTime === 'string'
+        ? JSON.parse(req.body.readTime)
+        : req.body.readTime;
+    } catch (parseError) {
+      console.error("Error parsing readTime:", parseError);
+      return res.status(400).send({ error: "Invalid readTime format" });
+    }
+
+    // creazione di un nuovo post con i dati dal corpo della richiesta e il percorso del file
+    const newPost = new blogPost({
+      ...req.body,
+      cover: coverPath,
+      readTime, // Usa il valore parsato o il valore originale
+    });
+
+    // salvataggio del nuovo post nel database
+    const savedPost = await newPost.save();
+    
+    // trova l'autore del post per inviare un'email
     const author = await Author.findById(savedPost.author);
-    // se la risposta è positiva viene inviata una mail
+    if (!author) {
+      return res.status(404).send({ error: "Author not found" });
+    }
+
+    // invia un'email all'autore per confermare la creazione del post
     console.log("Author email:", author.email);
     await transport.sendMail({
       from: "no-reply@example.com", // indirizzo di provenienza
       to: author.email, // indirizzo di destinazione
       subject: "Post created", // oggetto
       text: "You've created a new post", // testo
-      html: "<b>You've created a new post,congrats!</b>", // html body
+      html: "<b>You've created a new post, congrats!</b>", // corpo HTML
     });
 
-    res.status(201).send(savedPost); //invia il post creato come risposta
+    // invia il post creato come risposta
+    res.status(201).send(savedPost);
   } catch (err) {
-    console.log(err);
-    res.status(400).send({ error: "something went wrong" });
+    console.error(err);
+    res.status(400).send({ error: "Something went wrong" });
   }
 };
 

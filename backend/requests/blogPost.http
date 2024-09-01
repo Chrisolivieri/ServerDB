@@ -2,20 +2,22 @@ GET http://localhost:5000/blogPosts/?perPage=10
 
 ###
 
-GET http://localhost:5000/blogPosts/66cde53b0f768a29062566c1
+GET http://localhost:5000/blogPosts/66d43c52c71222094950c7de
+###
 
 POST http://localhost:5000/blogPosts
 Content-Type: application/json
 
+
 {
-    "category": "categoria1",
-    "title": "Primo Post",
-    "cover":,
+    "category": "categoria 1",
+    "title": "bo Post",
+    "cover":"",
     "readTime":{
         "value" : 5,
         "unit" : "min"
     },
-    "author": "66acfc3905cd283271ecfacd",
+    "author": "66d415a4177d1b6c086450e1",
     "content": "ciaooo"
 
 }

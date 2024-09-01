@@ -3,8 +3,11 @@ import express from "express";
 import * as blogPostsController from "../controllers/blogPosts.controller.js";
 import uploadCloudinary from "../middlewares/uploadCloudinary.js";
 import * as commentController from "../controllers/comment.controller.js";
+// import authorization from "../middlewares/authorization.js";
 
 const route = express.Router();
+
+//  route.use(authorization)
 
 // recupero tutti i blogPosts
 route.get("/", blogPostsController.allBlogPosts);
