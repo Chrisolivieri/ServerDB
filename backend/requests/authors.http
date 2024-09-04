@@ -5,11 +5,12 @@ POST http://localhost:5000/authors
 Content-Type: application/json
 
 {
-    "name": "Sempronio",
-    "email": "sasf@asdfsadfsadfad.it",
+    "name": "ciao",
+    "surname": "ciao2",
+    "email": "ciao0000.it",
     "age": 66,
     "approved": true,
-    "avatar" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpH62QXSB-NmfDAiDi0aVt3QL-czqizleZAA&s"
+    "password": "123"
 }
 ###
 
@@ -32,7 +33,7 @@ GET http://localhost:5000/authors/?perPage=10
 ###
 
 GET http://localhost:5000/authors/66d415a4177d1b6c086450e1/blogPosts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDQxNWE0MTc3ZDFiNmMwODY0NTBlMSIsImlhdCI6MTcyNTE4ODQwNCwiZXhwIjoxNzI1MTkyMDA0fQ.bwXASpu0uKtNqSdsRnMFdsxe8Yfle8BkxPrtzd8hxdE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDQxNWE0MTc3ZDFiNmMwODY0NTBlMSIsImlhdCI6MTcyNTE5OTQwMSwiZXhwIjoxNzI1MjAzMDAxfQ.Wg1Z04yjORS3sF44nWHDJ-giXE38zq-rJ-sa_P7MEW8
 
 ###
 
@@ -41,9 +42,10 @@ POST http://localhost:5000/register
 Content-Type: application/json
 
 {
-    "name": "Claudio",
+    "name": "ciao",
+    "surname": "ciao",
     "password": "qwerty",
-    "email": "claudio@gmail.it",
+    "email": "ciaoooo@gmail.it",
     "age": 66
 }
 
@@ -55,3 +57,9 @@ Content-Type: application/json
     "email": "claudio@gmail.it",
     "password": "qwerty"
 }
+
+###
+
+GET http://localhost:5000/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDQxNWE0MTc3ZDFiNmMwODY0NTBlMSIsImlhdCI6MTcyNTIwMDY5MCwiZXhwIjoxNzI1MjA0MjkwfQ.XtpU3Kx5ftTLvi54t750H8DketmEcxhO6nfctsfh0gQ
+

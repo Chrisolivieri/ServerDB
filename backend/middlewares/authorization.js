@@ -28,6 +28,7 @@ export default (req, res, next) => {
 
     req.authAuthor = author; // aggiunge alla richiesta le informazione dell'utente loggato
 
+    // chiamiamo poi il prossimo middleware
     next();
   });
 };

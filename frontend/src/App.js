@@ -5,21 +5,23 @@ import Home from "./views/home/Home";
 import Blog from "./views/blog/Blog";
 import NewBlogPost from "./views/new/New";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import AuthrContextProvider from "./context/AuthrContextProvider";
+import AuthorContextProvider from "./context/AuthorContextProvider";
+import Register from "./components/auth/Register";
 
 function App() {
   return (
-    <AuthrContextProvider>
+    <AuthorContextProvider>
     <Router>
       <NavBar />
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/blog/:id" element={<Blog />} />
         <Route path="/new" element={<NewBlogPost />} />
+        <Route path="/register" element={<Register/>} />
       </Routes>
       <Footer />
     </Router>
-    </AuthrContextProvider>
+    </AuthorContextProvider>
   );
 }
 

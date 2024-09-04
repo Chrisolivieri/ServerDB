@@ -8,9 +8,14 @@ import morgan from "morgan";
 import helmet from "helmet";
 import  endpoints from "express-list-endpoints";
 import authenticationRoutes from "./routes/authenticationRoutes.js";
+import passport from "passport";
+import GoogleStrategy from "./config/passport.config.js";
+
 const port = process.env.PORT || 5000;
 const host = process.env.HOST 
 const server = express();
+
+passport.use("google", GoogleStrategy);
 
 await mongoose
   .connect(process.env.MONGODB_CONNECTION_URI)

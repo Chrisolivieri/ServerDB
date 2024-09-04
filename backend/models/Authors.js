@@ -3,7 +3,11 @@ import { Schema, model } from "mongoose";
 //schema servono 2 argomenti: new Schema({},{})
 const authorSchema = new Schema(
   {
+    googleId: String,
     name: {
+      type: String,
+    },
+    surname: {
       type: String,
     },
     email: {
@@ -22,7 +26,7 @@ const authorSchema = new Schema(
     },
     password: {
       type: String,
-      required: true,
+      select: false, // fa in modo che la psw hashata non sia visibile
     },
     role: {
       type: String,

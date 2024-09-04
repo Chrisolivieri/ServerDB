@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
@@ -6,10 +6,15 @@ import "./styles.css";
 import { convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import { fetchNewPost } from "../../data/fetch";
+import { AuthorContext } from "../../context/AuthorContextProvider";
+import { jwtDecode } from "jwt-decode";
 
 const NewBlogPost = (props) => {
   const [text, setText] = useState("");
   const [cover, setCover] = useState("");
+  const { token } = useContext(AuthorContext);
+  const decodedToken = jwtDecode(token);
+  console.log(decodedToken);
 
   const initialFormValue = {
     category: "",
@@ -19,7 +24,7 @@ const NewBlogPost = (props) => {
       value: 0,
       unit: "",
     },
-    author: "66c8baa0c6942ae85b195b53",
+    author: decodedToken.id,
     content: "",
   };
   const [formValue, setFormValue] = useState(initialFormValue);

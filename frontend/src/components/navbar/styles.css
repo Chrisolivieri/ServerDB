@@ -11,10 +11,20 @@
   box-shadow: 2px 0px 4px 1px rgba(222, 222, 222, 1);
 }
 
-.blog-navbar-add-button {
+.bottone1 {
+  margin-left: 1rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+}
+
+.blog-navbar-add-button2 {
+  margin-left: 1rem;
   width: 160px;
   text-decoration: none;
+}
+
+.bottonContainer{
+  display: flex;
+  align-items: center;
+  justify-content: space-around
 }

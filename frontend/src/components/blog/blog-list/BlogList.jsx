@@ -4,7 +4,7 @@ import BlogItem from "../blog-item/BlogItem";
 import { fetchLoadPosts } from "../../../data/fetch";
 
 
-const BlogList = props => {
+const BlogList = () => {
 
   const [posts, setPosts] = useState([]);
 

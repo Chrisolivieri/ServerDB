@@ -39,6 +39,7 @@ export const postOne = async (req, res) => {
   try {
     //lo salviamo nel database
     const savedAuthor = await newAuthor.save();
+    console.log(savedAuthor);
 
     //invia l'autore creato come risposta
     return res.status(201).send(savedAuthor);
