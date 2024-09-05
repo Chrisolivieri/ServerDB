@@ -45,6 +45,7 @@ const NavBar = (props) => {
           <img className="blog-navbar-brand" alt="logo" src={logo} />
         </Navbar.Brand>
 
+        <div>
         {token && (
           <div className="bottonContainer">
             <Button as={Link} to="/new" className="bottone1 bg-dark" size="lg">
@@ -79,7 +80,6 @@ const NavBar = (props) => {
             </Button>
           </div>
         )}
-        <div>
           {!token && (
             <>
               <Button
@@ -154,6 +154,7 @@ const NavBar = (props) => {
                   <Button variant="primary" onClick={handleLogin}>
                     Login
                   </Button>
+                  <Button as ={Link} to="http://localhost:5000/login-google">Login con Google</Button>
                 </Modal.Footer>
               </Modal>
             </>

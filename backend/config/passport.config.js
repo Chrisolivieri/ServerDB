@@ -16,6 +16,7 @@ const googleStrategy = new GoogleStrategy(
       family_name: surname,
       email,
       sub: googleId,
+      picture: avatar
     } = profile._json;
 
     // nel db verifichiamo se esiste l'utente
@@ -28,6 +29,7 @@ const googleStrategy = new GoogleStrategy(
         name,
         surname,
         email,
+        avatar,
       });
 
       author = await newAuthor.save();
