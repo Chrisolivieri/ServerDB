@@ -154,7 +154,7 @@ const NavBar = (props) => {
                   <Button variant="primary" onClick={handleLogin}>
                     Login
                   </Button>
-                  <Button as ={Link} to="http://localhost:5000/login-google">Login con Google</Button>
+                  <Button as={Link} to={`${process.env.REACT_APP_API_URL}/login-google`}>Login con Google</Button>
                 </Modal.Footer>
               </Modal>
             </>

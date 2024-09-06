@@ -1,6 +1,6 @@
 export const fetchLoadPosts = async () => {
   const response = await fetch(
-    "http://localhost:5000/blogPosts/?page=1&perPage=10"
+    `${process.env.REACT_APP_API_URL}/blogPosts/?page=1&perPage=10`
   );
   const data = await response.json();
   return data;
@@ -15,7 +15,7 @@ export const fetchNewPost = async (formValue, cover) => {
   formData.append("readTime", JSON.stringify(formValue.readTime)); // converte l'oggetto in stringa JSON
   formData.append("author", formValue.author);
   formData.append("content", formValue.content);
-  const res = await fetch("http://localhost:5000/blogPosts", {
+  const res = await fetch(`${process.env.REACT_APP_API_URL}/blogPosts`, {
     method: "POST",
     body: formData, // nessun content type necessario
   });
@@ -24,7 +24,7 @@ export const fetchNewPost = async (formValue, cover) => {
 };
 
 export const fetchLogin = async (formvalue) => {
-  const res = await fetch("http://localhost:5000/login", {
+  const res = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
     headers: {
       "Content-Type": "application/json",
     },
@@ -43,7 +43,7 @@ export const fetchRegister = async (regFormValue, avatar) => {
   formData.append("surname", regFormValue.surname);
   formData.append("email", regFormValue.email);
   formData.append("password", regFormValue.password);
-  const res = await fetch("http://localhost:5000/register", {
+  const res = await fetch(`${process.env.REACT_APP_API_URL}/register`, {
     method: "POST",
     body: formData,
   });
@@ -52,7 +52,7 @@ export const fetchRegister = async (regFormValue, avatar) => {
 };
 
 export const fetchME = async () => {
-  const res = await fetch("http://localhost:5000/me", {
+  const res = await fetch(`${process.env.REACT_APP_API_URL}/me`, {
     headers: {
       "Authorization": `Bearer ${localStorage.getItem("token")}`,
     },
