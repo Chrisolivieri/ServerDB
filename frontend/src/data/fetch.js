@@ -38,8 +38,8 @@ export const fetchLogin = async (formvalue) => {
 export const fetchRegister = async (regFormValue, avatar) => {
   console.log(regFormValue);
   const formData = new FormData();
-  formData.append("avatar", avatar);
-  formData.append("name", regFormValue.name);
+  formData.append("avatar", avatar); //append serve a fare l'upload di un file all'interno di un form
+  formData.append("name", regFormValue.name); 
   formData.append("surname", regFormValue.surname);
   formData.append("email", regFormValue.email);
   formData.append("password", regFormValue.password);

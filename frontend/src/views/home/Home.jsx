@@ -28,7 +28,7 @@ const Home = props => {
   
     // Imposta il token nello stato dell'applicazione
     setToken(token);
-  }, [searchParams]);
+  }, [searchParams]); // effettua l'effetto solo una volta
    
   // useEffect(() => {
   //   (async () => {

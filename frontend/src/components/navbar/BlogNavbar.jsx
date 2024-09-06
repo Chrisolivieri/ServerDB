@@ -21,7 +21,7 @@ const NavBar = (props) => {
     setFormValue({
       ...formValue,
       [event.target.name]: event.target.value,
-    });
+    }); 
   };
 
   const handleLogin = async () => {
