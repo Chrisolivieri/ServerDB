@@ -35,7 +35,7 @@ const NavBar = (props) => {
     localStorage.removeItem("token");
     setToken(null);
     setLogOut(true);
-    alert("Sei uscito")
+    alert("Sei uscito");
   };
 
   return (

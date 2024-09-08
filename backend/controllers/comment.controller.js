@@ -14,22 +14,28 @@ export const createComment = async (req, res) => {
 
 export const readAllComments = async (req, res) => {
   try {
-    const allComments = await Comments.find({ blogPost: req.params.id }).populate("blogPost",["title"]); // usiamo populate per vedere anche il blogpost oltre al commento
+    const allComments = await Comments.find({
+      blogPost: req.params.id,
+    })
+    .populate("blogPost", ["title"])   // popola il titolo del blogPost
+    .populate("author", ["name", "email"]); // popola l'autore del commento con i campi desiderati (es. name, email)
+
     return res.send({ data: allComments });
   } catch (err) {
     res.status(400).send({ error: "something went wrong" });
   }
 };
 
-export const readOneComment = async (req,res)=>{
-  const id = req.params.id
+
+export const readOneComment = async (req, res) => {
+  const id = req.params.id;
   try {
-    const comment = await Comments.findById(id).populate("blogPost",["title"])
-    return res.send({data:comment})
+    const comment = await Comments.findById(id).populate("blogPost", ["title"]);
+    return res.send({ data: comment });
   } catch (error) {
-    res.status(400).send({error:"something went wrong"})
+    res.status(400).send({ error: "something went wrong" });
   }
-}
+};
 
 export const updateComment = async (req, res) => {
   const id = req.params.id;
@@ -52,4 +58,4 @@ export const deleteComment = async (req, res) => {
   } catch (err) {
     res.status(400).send({ error: "something went wrong" });
   }
-}
+};

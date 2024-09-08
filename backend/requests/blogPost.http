@@ -38,10 +38,11 @@ Content-Type: application/json
 GET http://localhost:5000/blogPosts?perPage=3&title=prato
 
 ###
-POST http://localhost:5000/blogPosts/66bf939feeeb01604d9b1f1c/comments
+POST http://localhost:5000/blogPosts/66d09b8851e7e1b2d4bda4b0/comments
 Content-Type: application/json
 
 {
+    "author": "66acfc3905cd283271ecfacd",
     "content": "terzo commento"
 }
 ###

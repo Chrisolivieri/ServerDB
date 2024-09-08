@@ -14,7 +14,7 @@ export const allBlogPosts = async (req, res) => {
     .sort({ title: 1 }) // ordinamento per titolo
     .skip((page - 1) * perPage) // elementi da saltare
     .limit(perPage) // limita il numero di post per pagina
-    .populate("author");
+    .populate("author"); // popola l'oggetto blogPost con l'autore
   res.send(blogPosts);
 };
 

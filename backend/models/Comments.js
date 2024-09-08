@@ -3,6 +3,10 @@ import { Schema, model } from "mongoose";
 //schema servono 2 argomenti: new Schema({},{})
 const commentsSchema = new Schema(
   {
+    author: {
+      type: Schema.Types.ObjectId,
+      ref: "Author",
+    },
     content: {
       type: String,
       minlenght: 1,
