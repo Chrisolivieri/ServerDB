@@ -1,27 +1,30 @@
 import React, { useContext, useState } from "react";
-import { Button, Container, Navbar, Modal } from "react-bootstrap";
+import { Button, Container, Navbar, Modal, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import "./styles.css";
 import { AuthorContext } from "../../context/AuthorContextProvider";
 import Form from "react-bootstrap/Form";
-import { fetchLogin } from "../../data/fetch";
+import { fetchLogin, fetchME } from "../../data/fetch";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = (props) => {
   const { token, setToken } = useContext(AuthorContext);
-
+  const { authorInfo, setAuthorInfo } = useContext(AuthorContext);
   const [show, setShow] = useState(false);
+  const [avatar, setAvatar] = useState(null);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [formValue, setFormValue] = useState({ email: "", password: "" });
   const [logOut, setLogOut] = useState(false);
+  const navigate = useNavigate();
 
   const handleChangeFormValue = (event) => {
     setFormValue({
       ...formValue,
       [event.target.name]: event.target.value,
-    }); 
+    });
   };
 
   const handleLogin = async () => {
@@ -36,6 +39,7 @@ const NavBar = (props) => {
     setToken(null);
     setLogOut(true);
     alert("Sei uscito");
+    navigate("/");
   };
 
   return (
@@ -46,40 +50,52 @@ const NavBar = (props) => {
         </Navbar.Brand>
 
         <div>
-        {token && (
-          <div className="bottonContainer">
-            <Button as={Link} to="/new" className="bottone1 bg-dark" size="lg">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                className="bi bi-plus-lg"
-                viewBox="0 0 16 16"
+          {token && (
+            <div className="bottonContainer">
+              <Button
+                as={Link}
+                to="/new"
+                className="bottone1 bg-dark"
+                size="lg"
               >
-                <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z" />
-              </svg>
-              Nuovo Articolo
-            </Button>
-            <Button
-              className="bottone1 bg-dark"
-              size="lg"
-              onClick={handleLogout}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                className="bi bi-plus-lg"
-                viewBox="0 0 16 16"
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  className="bi bi-plus-lg"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z" />
+                </svg>
+                Nuovo Articolo
+              </Button>
+              <Button
+                className="bottone1 bg-dark"
+                size="lg"
+                onClick={handleLogout}
               >
-                <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z" />
-              </svg>
-              Log out
-            </Button>
-          </div>
-        )}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  className="bi bi-plus-lg"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z" />
+                </svg>
+                Log out
+              </Button>
+              {authorInfo && (
+                <Image
+                  className="blog-author-navbar"
+                  src={authorInfo.avatar}
+                  roundedCircle
+                />
+              )}
+            </div>
+          )}
           {!token && (
             <>
               <Button
@@ -154,7 +170,12 @@ const NavBar = (props) => {
                   <Button variant="primary" onClick={handleLogin}>
                     Login
                   </Button>
-                  <Button as={Link} to={`${process.env.REACT_APP_API_URL}/login-google`}>Login con Google</Button>
+                  <Button
+                    as={Link}
+                    to={`${process.env.REACT_APP_API_URL}/login-google`}
+                  >
+                    Login con Google
+                  </Button>
                 </Modal.Footer>
               </Modal>
             </>

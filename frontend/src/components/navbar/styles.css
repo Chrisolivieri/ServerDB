@@ -23,6 +23,12 @@
   text-decoration: none;
 }
 
-.bottonContainer{
+.bottonContainer {
   display: flex;
+}
+
+.blog-author-navbar {
+  width: 40px;
+  height: 40px;
+  margin-left: 1rem;
 }

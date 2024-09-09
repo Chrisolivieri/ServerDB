@@ -1,20 +1,28 @@
 import React, { useCallback, useContext, useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
+import { Alert, Button, Container, Form } from "react-bootstrap";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "./styles.css";
-import { convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import { fetchNewPost } from "../../data/fetch";
 import { AuthorContext } from "../../context/AuthorContextProvider";
 import { jwtDecode } from "jwt-decode";
-
+import { useNavigate } from "react-router-dom";
 const NewBlogPost = (props) => {
   const [text, setText] = useState("");
   const [cover, setCover] = useState("");
   const { token } = useContext(AuthorContext);
   const decodedToken = jwtDecode(token);
   console.log(decodedToken);
+  const [alert, setAlert] = useState(false);
+
+  const handleShowAlert = () => {
+    setAlert(true);
+  };
+
+  const handleCloseAlert = () => {
+    setAlert(false);
+  };
 
   const initialFormValue = {
     category: "",
@@ -106,12 +114,18 @@ const NewBlogPost = (props) => {
             style={{
               marginLeft: "1em",
             }}
-            onClick={() => fetchNewPost(formValue, cover)}
+            onClick={() => fetchNewPost(formValue, cover) && handleShowAlert()}
           >
             Invia
           </Button>
         </Form.Group>
       </Form>
+      {alert && (
+        <Alert variant="success" className="mt-5" onClose={handleCloseAlert} dismissible>
+          {alert}
+          <h2>Post creato con successo</h2>
+        </Alert>
+      )}
     </Container>
   );
 };

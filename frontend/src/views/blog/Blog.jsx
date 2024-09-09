@@ -1,13 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-  Container,
-  Image,
-  Row,
-  Col,
-  Button,
-  Modal,
-  Form,
-} from "react-bootstrap";
+import { Container, Image, Row, Col } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import BlogAuthor from "../../components/blog/blog-author/BlogAuthor";
 import BlogLike from "../../components/likes/BlogLike";
@@ -19,7 +11,6 @@ import { AuthorContext } from "../../context/AuthorContextProvider";
 const Blog = (props) => {
   const { authorInfo } = useContext(AuthorContext);
   const [comments, setComments] = useState([]);
-  const [show, setShow] = useState(false);
   const [blog, setBlog] = useState({});
   const [loading, setLoading] = useState(true);
   const params = useParams();
@@ -32,7 +23,7 @@ const Blog = (props) => {
   };
 
   const [formValue, setFormValue] = useState(initialFormState);
-  
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormValue({
@@ -107,57 +98,71 @@ const Blog = (props) => {
             }}
           ></div>
 
-
-          <div className="mt-5">Commenti</div>
           <Row>
+            <h3 className="mt-5">Sezione Commenti</h3>
+            <div className="comments">
             {comments.map((comment, i) => (
               <Col
-                key={`item-${i}`}
-                md={8}
-                className="mb-3"
-                style={{
-                  marginBottom: 20,
-                }}
+              key={`item-${i}`}
+              md={8}
+              className="mb-3"
+              style={{
+                marginBottom: 20,
+              }}
               >
-                <div className="mt-2 border rounded bg-light">
-                  {comment.content} - {"commento di " + comment.author.name}
-                </div>
+                <Container>
+                  <div className="blog-comments">
+                    <h3>{comment.content}</h3>
+                    <p>{"commento di " + comment.author.name}</p>
+                  </div>
+                </Container>
               </Col>
             ))}
+            </div>
           </Row>
           <div className="form">
-                    <div className="row">
-                      <div className="row">
-                        
-                        <div className="input-div">
-                      <img src={authorInfo?.avatar} className="avatarComment" />
-                          <span className="input-name"><h4>{authorInfo?.name}</h4></span>
-                          <textarea
-                            rows="2"
-                            className="input-box"
-                            placeholder="Scrivi qui un commento"
-                            name="content"
-                            value={formValue.content}
-                            onChange={handleChange}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="btn-div">
-                      <button
-                        className="post-btn"
-                        onClick={handleSaveComment}
-                        type="button"
-                      >
-                        Post
-                      </button>
-                    </div>
+            <div className="row">
+              <div className="row">
+                <div className="input-div">
+                  <div className="d-flex">
+                    <Row>
+                      <Col xs={"auto"} className="pe-0">
+                        <Image
+                          className="blog-author"
+                          src={authorInfo.avatar}
+                          roundedCircle
+                        />
+                      </Col>
+                      <Col>
+                        <h6>{authorInfo.name}</h6>
+                      </Col>
+                    </Row>
                   </div>
+                  <textarea
+                    rows="2"
+                    className="input-box"
+                    placeholder="Scrivi qui un commento"
+                    name="content"
+                    value={formValue.content}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="btn-div">
+              <button
+                className="post-btn"
+                onClick={handleSaveComment}
+                type="button"
+              >
+                Post
+              </button>
+            </div>
+          </div>
         </Container>
       </div>
     );
   }
 };
 
-                  
 export default Blog;

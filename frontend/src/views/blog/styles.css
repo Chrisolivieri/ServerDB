@@ -99,6 +99,14 @@ color:rgb(49, 49, 49);
 
 .avatarComment{
   width: 4rem;
-  height: auto;
-  border-radius: 50%;
+ 
+}
+
+.comments{
+  margin-top: 2rem;
+}
+
+.blog-comments{
+  border: solid 1px grey;
+  width: 100%;
 }
